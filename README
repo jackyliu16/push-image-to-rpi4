@@ -1,0 +1,44 @@
+# pre: buy some thing
+1. [Serial USB to TTL CH340 Module](https://www.amazon.com/HiLetgo-Module-Microcontroller-Download-Serial/dp/B00LZV1G6K/ref=sr_1_3?dib=eyJ2IjoiMSJ9.EVDg6VSjpenXHkAOIddkejC8NrNLBaiI9YKosxxcvxsvWHCkJuYWT97oslmx7iE-il7I7ilkI07pfXYrJnjb0-gM8hu4y8_hMEVA7hiUtPZtjhovoAeF0-L7rM0xTe-hdNscYjbIspct3yjOtYSF9QPNFmr9XmeC5Os2gCQxZihglIJJDxUWWAhJL_MNl06dDKZnk82pkR_p09laqdfg0nFMwJwdxLDObHv3gzDHWNk.pvOBDJ9aVLFwecXlCYuMONK54Z_7sxnzAvdO71qkHWI&dib_tag=se&keywords=CH340&qid=1709218438&sr=8-3)
+2. Some Female to Female [Dupont Wire](https://www.amazon.com/Elegoo-EL-CP-004-Multicolored-Breadboard-arduino/dp/B01EV70C78/ref=sr_1_3?dib=eyJ2IjoiMSJ9.OCLDs3D5By4QvSSJfVxcRa7LFdoHpv56YLqS9wbJRIGaY_r5UKFkopHdBRu0aVmyYfSaH77oX0ure59RTu2R0GWeOUm8DEzRUHiLTYnKqPa02peSrC0JWZMUQPaErE40BeYQpDl0ywu9vg7zI1gHJWxdYtOgrehyUhiT9G9657pN73jvrY3Vd5RrBH9-5aAYEDKpN_P1gS48Yqv9n7S3efD7AKdAsgYsLsN1QLBFeyI.VxVp4ZfND0S73SSXYiJlh6KJD8GRdD2Pn2LHUrCHSj4&dib_tag=se&keywords=DuPont+line&qid=1709218493&sr=8-3)
+
+# Transmit A Kernel Image to Raspberry 4B (bcm2711) 
+
+1. Connect CH304 from [bcm2711 pin 8,10,12](https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-reduced-schematics.pdf) (Rx to Tx, Tx to Rx, GND to GND).
+    By the ways, power indicator closest to 1.
+2. check if your sd card has contians following file 
+    [start4.elf](https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/start4.elf), 
+    [fixup4.dat](https://github.com/raspberrypi/firmware/raw/master/boot/fixup4.dat), 
+    [bcm2711-rpi-4-b.dtb](https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/bcm2711-rpi-4-b.dtb)
+3. Copy ./images/chainboot.img or ./images/jtag-debug.img, which depend on what you want to do
+For the most time, you will use chainboot
+4. just run `make OUT_BIN=./images/helloworld_aarch64-raspi4.bin` test if there is some output massage like follows.
+and repower your raspi4 FAD.
+NOTE: If you want to use jtag, check my [fix docs](https://github.com/arceos-usb/arceos_experiment/pull/11/commits/2bf11b0655bc0458d9ffe22cf04c3b9094c37ed0#diff-d852f3a6dc9341c97fb814b3131650773f9e0630d1eeb65a52b016d18a6ea474R85-R93)
+NOTE: If you are using Non-Linux, maybe you need to check [libusb](https://github.com/libusb/libusb)
+Or maybe the device name wasn't /dev/ttyUSB0 but /dev/ttyUSB1 or something like /dev/ttyACM0(look like in macOS)? 
+NOTE: Remember to close your connect via `C-c`.
+
+```
+[MP] ⏩ Pushing 60 KiB =========================================🦀 100% 0 KiB/s Time: 00:00:00
+[ML] Loaded! Executing the payload now
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ You're using chainboot image    . @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+       d8888                            .d88888b.   .d8888b.
+      d88888                           d88P" "Y88b d88P  Y88b
+     d88P888                           888     888 Y88b.
+    d88P 888 888d888  .d8888b  .d88b.  888     888  "Y888b.
+   d88P  888 888P"   d88P"    d8P  Y8b 888     888     "Y88b.
+  d88P   888 888     888      88888888 888     888       "888
+ d8888888888 888     Y88b.    Y8b.     Y88b. .d88P Y88b  d88P
+d88P     888 888      "Y8888P  "Y8888   "Y88888P"   "Y8888P"
+```
+
+Reference: 
+  - https://github.com/rust-embedded/rust-raspberrypi-OS-tutorials
+  - https://github.com/arceos-usb/arceos_experiment/pull/11
+  - https://github.com/rcore-os/arceos
+
