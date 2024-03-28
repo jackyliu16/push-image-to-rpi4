@@ -15,8 +15,9 @@ For the most time, you will use chainboot
 4. just run `make OUT_BIN=./images/helloworld_aarch64-raspi4.bin` test if there is some output massage like follows.
 and repower your raspi4 FAD.
 NOTE: If you want to use jtag, check my [fix docs](https://github.com/arceos-usb/arceos_experiment/pull/11/commits/2bf11b0655bc0458d9ffe22cf04c3b9094c37ed0#diff-d852f3a6dc9341c97fb814b3131650773f9e0630d1eeb65a52b016d18a6ea474R85-R93)
-NOTE: If you are using Non-Linux, maybe you need to check [libusb](https://github.com/libusb/libusb)
-Or maybe the device name wasn't /dev/ttyUSB0 but /dev/ttyUSB1 or something like /dev/ttyACM0(look like in macOS)? 
+NOTE: If you stuck in [MP] ⏳ Waiting for /dev/ttyUSB0 or other message indicate your CH304 device couldn't connect properly.
+  If you are using Windows, maybe you need to check [libusb](https://github.com/libusb/libusb)
+  Or maybe the device name wasn't /dev/ttyUSB0 but /dev/ttyUSB1 or something like /dev/ttyACM0(macOS?) 
 NOTE: Remember to close your connect via `C-c`.
 
 ```
