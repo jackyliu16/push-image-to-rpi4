@@ -10,7 +10,7 @@
     [start4.elf](https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/start4.elf), 
     [fixup4.dat](https://github.com/raspberrypi/firmware/raw/master/boot/fixup4.dat), 
     [bcm2711-rpi-4-b.dtb](https://raw.githubusercontent.com/raspberrypi/firmware/master/boot/bcm2711-rpi-4-b.dtb)
-3. Copy ./images/chainboot.img or ./images/jtag-debug.img, which depend on what you want to do
+3. Copy ./images/chainboot.img or ./images/jtag-debug.img into your sd card just like previous, which depend on what you want to do
 For the most time, you will use chainboot
 4. just run `make OUT_BIN=./images/helloworld_aarch64-raspi4.bin` test if there is some output massage like follows.
 and repower your raspi4 FAD.
