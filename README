@@ -4,6 +4,8 @@
 
 # Transmit A Kernel Image to Raspberry 4B (bcm2711) 
 
+> It is not recommended to transfer files larger than **500kb** in this way (include original linux kernel image)
+
 1. Connect CH304 from [bcm2711 pin 8,10,12](https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-reduced-schematics.pdf) (Rx to Tx, Tx to Rx, GND to GND).
     By the ways, power indicator closest to 1.
 2. check if your sd card has contians following file 
